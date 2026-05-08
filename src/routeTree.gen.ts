@@ -9,38 +9,182 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppTimelineRouteImport } from './routes/app.timeline'
+import { Route as AppSearchRouteImport } from './routes/app.search'
+import { Route as AppReplayRouteImport } from './routes/app.replay'
+import { Route as AppGalaxyRouteImport } from './routes/app.galaxy'
+import { Route as AppCaptureRouteImport } from './routes/app.capture'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppTimelineRoute = AppTimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSearchRoute = AppSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReplayRoute = AppReplayRouteImport.update({
+  id: '/replay',
+  path: '/replay',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGalaxyRoute = AppGalaxyRouteImport.update({
+  id: '/galaxy',
+  path: '/galaxy',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCaptureRoute = AppCaptureRouteImport.update({
+  id: '/capture',
+  path: '/capture',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/signup': typeof SignupRoute
+  '/app/capture': typeof AppCaptureRoute
+  '/app/galaxy': typeof AppGalaxyRoute
+  '/app/replay': typeof AppReplayRoute
+  '/app/search': typeof AppSearchRoute
+  '/app/timeline': typeof AppTimelineRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/signup': typeof SignupRoute
+  '/app/capture': typeof AppCaptureRoute
+  '/app/galaxy': typeof AppGalaxyRoute
+  '/app/replay': typeof AppReplayRoute
+  '/app/search': typeof AppSearchRoute
+  '/app/timeline': typeof AppTimelineRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/signup': typeof SignupRoute
+  '/app/capture': typeof AppCaptureRoute
+  '/app/galaxy': typeof AppGalaxyRoute
+  '/app/replay': typeof AppReplayRoute
+  '/app/search': typeof AppSearchRoute
+  '/app/timeline': typeof AppTimelineRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/login'
+    | '/onboarding'
+    | '/signup'
+    | '/app/capture'
+    | '/app/galaxy'
+    | '/app/replay'
+    | '/app/search'
+    | '/app/timeline'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app'
+    | '/login'
+    | '/onboarding'
+    | '/signup'
+    | '/app/capture'
+    | '/app/galaxy'
+    | '/app/replay'
+    | '/app/search'
+    | '/app/timeline'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/login'
+    | '/onboarding'
+    | '/signup'
+    | '/app/capture'
+    | '/app/galaxy'
+    | '/app/replay'
+    | '/app/search'
+    | '/app/timeline'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  OnboardingRoute: typeof OnboardingRoute
+  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +192,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/timeline': {
+      id: '/app/timeline'
+      path: '/timeline'
+      fullPath: '/app/timeline'
+      preLoaderRoute: typeof AppTimelineRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/search': {
+      id: '/app/search'
+      path: '/search'
+      fullPath: '/app/search'
+      preLoaderRoute: typeof AppSearchRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/replay': {
+      id: '/app/replay'
+      path: '/replay'
+      fullPath: '/app/replay'
+      preLoaderRoute: typeof AppReplayRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/galaxy': {
+      id: '/app/galaxy'
+      path: '/galaxy'
+      fullPath: '/app/galaxy'
+      preLoaderRoute: typeof AppGalaxyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/capture': {
+      id: '/app/capture'
+      path: '/capture'
+      fullPath: '/app/capture'
+      preLoaderRoute: typeof AppCaptureRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppCaptureRoute: typeof AppCaptureRoute
+  AppGalaxyRoute: typeof AppGalaxyRoute
+  AppReplayRoute: typeof AppReplayRoute
+  AppSearchRoute: typeof AppSearchRoute
+  AppTimelineRoute: typeof AppTimelineRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppCaptureRoute: AppCaptureRoute,
+  AppGalaxyRoute: AppGalaxyRoute,
+  AppReplayRoute: AppReplayRoute,
+  AppSearchRoute: AppSearchRoute,
+  AppTimelineRoute: AppTimelineRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  LoginRoute: LoginRoute,
+  OnboardingRoute: OnboardingRoute,
+  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
