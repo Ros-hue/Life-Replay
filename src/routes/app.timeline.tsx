@@ -13,7 +13,9 @@ export const Route = createFileRoute("/app/timeline")({
 function Timeline() {
   const nav = useNavigate();
   const [items, setItems] = useState<Memory[]>([]);
-  useEffect(() => { setItems(store.getMemories()); }, []);
+  useEffect(() => {
+    setItems(store.getMemories());
+  }, []);
 
   return (
     <>
@@ -33,9 +35,12 @@ function Timeline() {
               <div key={m.id} className="relative md:grid md:grid-cols-2 md:gap-12">
                 {/* Node */}
                 <motion.div
-                  initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 h-3 w-3 rounded-full bg-aurora glow-cyan" />
+                  className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 h-3 w-3 rounded-full bg-aurora glow-cyan"
+                />
                 <div className={`pl-12 md:pl-0 ${left ? "md:pr-12" : "md:order-2 md:pl-12"}`}>
                   <MemoryCard memory={m} index={i} onReplay={() => nav({ to: "/app/replay" })} />
                 </div>

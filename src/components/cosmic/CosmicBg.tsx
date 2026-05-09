@@ -48,29 +48,51 @@ export function CosmicBg({ dense = false }: { dense?: boolean }) {
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
   }, [dense]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Nebulae blobs */}
-      <div className="absolute -top-40 -left-40 h-[40rem] w-[40rem] rounded-full opacity-40 blur-3xl animate-drift"
-           style={{ background: "radial-gradient(circle, var(--cyan-glow), transparent 60%)" }} />
-      <div className="absolute top-1/3 -right-40 h-[36rem] w-[36rem] rounded-full opacity-30 blur-3xl animate-drift"
-           style={{ background: "radial-gradient(circle, var(--fuchsia-glow), transparent 60%)", animationDelay: "-6s" }} />
-      <div className="absolute bottom-0 left-1/4 h-[30rem] w-[30rem] rounded-full opacity-25 blur-3xl animate-drift"
-           style={{ background: "radial-gradient(circle, var(--violet-glow), transparent 60%)", animationDelay: "-3s" }} />
+      <div
+        className="absolute -top-40 -left-40 h-[40rem] w-[40rem] rounded-full opacity-40 blur-3xl animate-drift"
+        style={{ background: "radial-gradient(circle, var(--cyan-glow), transparent 60%)" }}
+      />
+      <div
+        className="absolute top-1/3 -right-40 h-[36rem] w-[36rem] rounded-full opacity-30 blur-3xl animate-drift"
+        style={{
+          background: "radial-gradient(circle, var(--fuchsia-glow), transparent 60%)",
+          animationDelay: "-6s",
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-1/4 h-[30rem] w-[30rem] rounded-full opacity-25 blur-3xl animate-drift"
+        style={{
+          background: "radial-gradient(circle, var(--violet-glow), transparent 60%)",
+          animationDelay: "-3s",
+        }}
+      />
       {/* Grid overlay */}
-      <div className="absolute inset-0 grid-cosmic opacity-[0.35]" style={{
-        maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-        WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-      }} />
+      <div
+        className="absolute inset-0 grid-cosmic opacity-[0.35]"
+        style={{
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+        }}
+      />
       {/* Stars */}
       <canvas ref={canvasRef} className="absolute inset-0" />
       {/* Vignette */}
-      <div className="absolute inset-0" style={{
-        background: "radial-gradient(ellipse at center, transparent 50%, oklch(0.04 0.01 270 / 0.7) 100%)",
-      }} />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 50%, oklch(0.04 0.01 270 / 0.7) 100%)",
+        }}
+      />
     </div>
   );
 }

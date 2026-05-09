@@ -33,7 +33,9 @@ export function FloatingOrb() {
             exit={{ opacity: 0, y: 12, scale: 0.95 }}
             className="glass-strong absolute bottom-24 right-0 w-72 rounded-2xl p-4 shadow-2xl"
           >
-            <div className="mb-2 text-xs uppercase tracking-widest text-primary/80">AI Companion</div>
+            <div className="mb-2 text-xs uppercase tracking-widest text-primary/80">
+              AI Companion
+            </div>
             <div className="text-sm leading-relaxed text-foreground/90">
               <Typewriter text={insight} />
             </div>
@@ -41,7 +43,7 @@ export function FloatingOrb() {
         )}
       </AnimatePresence>
       <button
-        onClick={() => setOpen(o => !o)}
+        onClick={() => setOpen((o) => !o)}
         className="group relative h-16 w-16 transition hover:scale-105"
         aria-label="AI companion"
       >

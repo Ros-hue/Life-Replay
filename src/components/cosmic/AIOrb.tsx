@@ -22,9 +22,11 @@ export function AIOrb({ size = 220, className = "", message, floating = false }:
       <motion.div
         className="absolute inset-0 rounded-full"
         style={{
-          background: "conic-gradient(from 0deg, transparent, var(--cyan-glow), transparent, var(--fuchsia-glow), transparent)",
+          background:
+            "conic-gradient(from 0deg, transparent, var(--cyan-glow), transparent, var(--fuchsia-glow), transparent)",
           mask: "radial-gradient(circle, transparent 62%, black 63%, black 70%, transparent 71%)",
-          WebkitMask: "radial-gradient(circle, transparent 62%, black 63%, black 70%, transparent 71%)",
+          WebkitMask:
+            "radial-gradient(circle, transparent 62%, black 63%, black 70%, transparent 71%)",
         }}
         animate={{ rotate: 360 }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
@@ -35,8 +37,10 @@ export function AIOrb({ size = 220, className = "", message, floating = false }:
         animate={floating ? { y: [0, -10, 0] } : {}}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="absolute inset-2 rounded-full opacity-60"
-             style={{ background: "radial-gradient(circle at 35% 30%, white, transparent 40%)" }} />
+        <div
+          className="absolute inset-2 rounded-full opacity-60"
+          style={{ background: "radial-gradient(circle at 35% 30%, white, transparent 40%)" }}
+        />
       </motion.div>
       {/* Inner pulse */}
       <motion.div
@@ -59,10 +63,16 @@ export function Typewriter({ text, speed = 30 }: { text: string; speed?: number 
     setShown("");
     let i = 0;
     const id = setInterval(() => {
-      i++; setShown(text.slice(0, i));
+      i++;
+      setShown(text.slice(0, i));
       if (i >= text.length) clearInterval(id);
     }, speed);
     return () => clearInterval(id);
   }, [text, speed]);
-  return <span>{shown}<span className="ml-0.5 inline-block h-3 w-[2px] animate-pulse bg-primary" /></span>;
+  return (
+    <span>
+      {shown}
+      <span className="ml-0.5 inline-block h-3 w-[2px] animate-pulse bg-primary" />
+    </span>
+  );
 }

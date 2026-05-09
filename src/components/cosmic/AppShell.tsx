@@ -8,10 +8,11 @@ import { useEffect, useState } from "react";
 
 const NAV = [
   { to: "/app/timeline", label: "Timeline", icon: Clock },
-  { to: "/app/capture",  label: "Capture",  icon: Plus },
-  { to: "/app/galaxy",   label: "Galaxy",   icon: Orbit },
-  { to: "/app/search",   label: "Search",   icon: Search },
-  { to: "/app/replay",   label: "Replay",   icon: Play },
+  { to: "/app/capture", label: "Capture", icon: Plus },
+  { to: "/app/galaxy", label: "Galaxy", icon: Orbit },
+  { to: "/app/search", label: "Search", icon: Search },
+  { to: "/app/replay", label: "Replay", icon: Play },
+  { to: "/app/server", label: "Server", icon: Sparkles },
 ];
 
 export function AppShell() {
@@ -21,11 +22,17 @@ export function AppShell() {
 
   useEffect(() => {
     const u = store.getUser();
-    if (!u) { nav({ to: "/login" }); return; }
+    if (!u) {
+      nav({ to: "/login" });
+      return;
+    }
     setUser(u);
   }, [nav]);
 
-  const logout = () => { store.setUser(null); nav({ to: "/" }); };
+  const logout = () => {
+    store.setUser(null);
+    nav({ to: "/" });
+  };
 
   return (
     <div className="min-h-screen">
@@ -41,12 +48,17 @@ export function AppShell() {
             {NAV.map(({ to, label, icon: Icon }) => {
               const active = loc.pathname.startsWith(to);
               return (
-                <Link key={to} to={to}
+                <Link
+                  key={to}
+                  to={to}
                   className={`relative inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm transition
-                    ${active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
+                    ${active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                >
                   {active && (
-                    <motion.span layoutId="navpill"
-                      className="absolute inset-0 rounded-full bg-white/5 ring-glow" />
+                    <motion.span
+                      layoutId="navpill"
+                      className="absolute inset-0 rounded-full bg-white/5 ring-glow"
+                    />
                   )}
                   <Icon className="relative h-4 w-4" />
                   <span className="relative">{label}</span>
@@ -58,9 +70,11 @@ export function AppShell() {
             <span className="hidden sm:block text-xs text-muted-foreground">
               {user?.name || "Traveler"}
             </span>
-            <button onClick={logout}
+            <button
+              onClick={logout}
               className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
-              aria-label="Sign out">
+              aria-label="Sign out"
+            >
               <LogOut className="h-4 w-4" />
             </button>
           </div>
@@ -70,9 +84,12 @@ export function AppShell() {
           {NAV.map(({ to, label, icon: Icon }) => {
             const active = loc.pathname.startsWith(to);
             return (
-              <Link key={to} to={to}
+              <Link
+                key={to}
+                to={to}
                 className={`flex flex-1 flex-col items-center gap-0.5 rounded-lg px-2 py-1.5 text-[10px]
-                  ${active ? "text-primary" : "text-muted-foreground"}`}>
+                  ${active ? "text-primary" : "text-muted-foreground"}`}
+              >
                 <Icon className="h-4 w-4" /> {label}
               </Link>
             );
@@ -88,8 +105,14 @@ export function AppShell() {
   );
 }
 
-export function PageHeader({ eyebrow, title, subtitle }: {
-  eyebrow?: string; title: string; subtitle?: string;
+export function PageHeader({
+  eyebrow,
+  title,
+  subtitle,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
 }) {
   return (
     <div className="mb-10">

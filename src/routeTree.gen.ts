@@ -10,11 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as ServerRouteImport } from './routes/server'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppTimelineRouteImport } from './routes/app.timeline'
+import { Route as AppServerRouteImport } from './routes/app.server'
 import { Route as AppSearchRouteImport } from './routes/app.search'
 import { Route as AppReplayRouteImport } from './routes/app.replay'
 import { Route as AppGalaxyRouteImport } from './routes/app.galaxy'
@@ -23,6 +25,11 @@ import { Route as AppCaptureRouteImport } from './routes/app.capture'
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServerRoute = ServerRouteImport.update({
+  id: '/server',
+  path: '/server',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -48,6 +55,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppTimelineRoute = AppTimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppServerRoute = AppServerRouteImport.update({
+  id: '/server',
+  path: '/server',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSearchRoute = AppSearchRouteImport.update({
@@ -76,11 +88,13 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/server': typeof ServerRoute
   '/signup': typeof SignupRoute
   '/app/capture': typeof AppCaptureRoute
   '/app/galaxy': typeof AppGalaxyRoute
   '/app/replay': typeof AppReplayRoute
   '/app/search': typeof AppSearchRoute
+  '/app/server': typeof AppServerRoute
   '/app/timeline': typeof AppTimelineRoute
 }
 export interface FileRoutesByTo {
@@ -88,11 +102,13 @@ export interface FileRoutesByTo {
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/server': typeof ServerRoute
   '/signup': typeof SignupRoute
   '/app/capture': typeof AppCaptureRoute
   '/app/galaxy': typeof AppGalaxyRoute
   '/app/replay': typeof AppReplayRoute
   '/app/search': typeof AppSearchRoute
+  '/app/server': typeof AppServerRoute
   '/app/timeline': typeof AppTimelineRoute
 }
 export interface FileRoutesById {
@@ -101,11 +117,13 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
+  '/server': typeof ServerRoute
   '/signup': typeof SignupRoute
   '/app/capture': typeof AppCaptureRoute
   '/app/galaxy': typeof AppGalaxyRoute
   '/app/replay': typeof AppReplayRoute
   '/app/search': typeof AppSearchRoute
+  '/app/server': typeof AppServerRoute
   '/app/timeline': typeof AppTimelineRoute
 }
 export interface FileRouteTypes {
@@ -115,11 +133,13 @@ export interface FileRouteTypes {
     | '/app'
     | '/login'
     | '/onboarding'
+    | '/server'
     | '/signup'
     | '/app/capture'
     | '/app/galaxy'
     | '/app/replay'
     | '/app/search'
+    | '/app/server'
     | '/app/timeline'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -127,11 +147,13 @@ export interface FileRouteTypes {
     | '/app'
     | '/login'
     | '/onboarding'
+    | '/server'
     | '/signup'
     | '/app/capture'
     | '/app/galaxy'
     | '/app/replay'
     | '/app/search'
+    | '/app/server'
     | '/app/timeline'
   id:
     | '__root__'
@@ -139,11 +161,13 @@ export interface FileRouteTypes {
     | '/app'
     | '/login'
     | '/onboarding'
+    | '/server'
     | '/signup'
     | '/app/capture'
     | '/app/galaxy'
     | '/app/replay'
     | '/app/search'
+    | '/app/server'
     | '/app/timeline'
   fileRoutesById: FileRoutesById
 }
@@ -152,6 +176,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
+  ServerRoute: typeof ServerRoute
   SignupRoute: typeof SignupRoute
 }
 
@@ -162,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/server': {
+      id: '/server'
+      path: '/server'
+      fullPath: '/server'
+      preLoaderRoute: typeof ServerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -197,6 +229,13 @@ declare module '@tanstack/react-router' {
       path: '/timeline'
       fullPath: '/app/timeline'
       preLoaderRoute: typeof AppTimelineRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/server': {
+      id: '/app/server'
+      path: '/server'
+      fullPath: '/app/server'
+      preLoaderRoute: typeof AppServerRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/search': {
@@ -235,6 +274,7 @@ interface AppRouteChildren {
   AppGalaxyRoute: typeof AppGalaxyRoute
   AppReplayRoute: typeof AppReplayRoute
   AppSearchRoute: typeof AppSearchRoute
+  AppServerRoute: typeof AppServerRoute
   AppTimelineRoute: typeof AppTimelineRoute
 }
 
@@ -243,6 +283,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppGalaxyRoute: AppGalaxyRoute,
   AppReplayRoute: AppReplayRoute,
   AppSearchRoute: AppSearchRoute,
+  AppServerRoute: AppServerRoute,
   AppTimelineRoute: AppTimelineRoute,
 }
 
@@ -253,6 +294,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
+  ServerRoute: ServerRoute,
   SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport

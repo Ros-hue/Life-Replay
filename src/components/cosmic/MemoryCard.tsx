@@ -3,12 +3,20 @@ import type { Memory } from "@/lib/store";
 import { EMOTION_COLORS } from "@/lib/store";
 import { Play, Sparkles } from "lucide-react";
 
-export function MemoryCard({ memory, onReplay, index = 0 }: {
-  memory: Memory; onReplay?: (m: Memory) => void; index?: number;
+export function MemoryCard({
+  memory,
+  onReplay,
+  index = 0,
+}: {
+  memory: Memory;
+  onReplay?: (m: Memory) => void;
+  index?: number;
 }) {
   const grad = EMOTION_COLORS[memory.emotion];
   const date = new Date(memory.createdAt).toLocaleDateString(undefined, {
-    month: "short", day: "numeric", year: "numeric",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
   return (
     <motion.div
@@ -19,10 +27,14 @@ export function MemoryCard({ memory, onReplay, index = 0 }: {
       className="glass group relative overflow-hidden rounded-2xl p-6 transition"
     >
       {/* Glow accent */}
-      <div className={`absolute -top-20 -right-20 h-48 w-48 rounded-full bg-gradient-to-br ${grad} opacity-20 blur-3xl transition group-hover:opacity-40`} />
+      <div
+        className={`absolute -top-20 -right-20 h-48 w-48 rounded-full bg-gradient-to-br ${grad} opacity-20 blur-3xl transition group-hover:opacity-40`}
+      />
       <div className="relative">
         <div className="mb-3 flex items-center justify-between">
-          <span className={`inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r ${grad} px-3 py-1 text-xs font-medium text-black/80`}>
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r ${grad} px-3 py-1 text-xs font-medium text-black/80`}
+          >
             <Sparkles className="h-3 w-3" /> {memory.emotion}
           </span>
           <span className="text-xs text-muted-foreground">{date}</span>
@@ -31,8 +43,11 @@ export function MemoryCard({ memory, onReplay, index = 0 }: {
         <p className="mb-4 text-sm italic text-muted-foreground">"{memory.summary}"</p>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-1.5">
-            {memory.tags.map(t => (
-              <span key={t} className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted-foreground">
+            {memory.tags.map((t) => (
+              <span
+                key={t}
+                className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted-foreground"
+              >
                 #{t}
               </span>
             ))}

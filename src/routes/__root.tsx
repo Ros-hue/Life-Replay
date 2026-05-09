@@ -73,10 +73,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Life Replay — The AI Memory Operating System" },
-      { name: "description", content: "Capture, replay, and understand your life with an emotionally intelligent AI." },
+      {
+        name: "description",
+        content: "Capture, replay, and understand your life with an emotionally intelligent AI.",
+      },
       { name: "author", content: "Life Replay" },
       { property: "og:title", content: "Life Replay — The AI Memory Operating System" },
-      { property: "og:description", content: "Capture, replay, and understand your life with an emotionally intelligent AI." },
+      {
+        property: "og:description",
+        content: "Capture, replay, and understand your life with an emotionally intelligent AI.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
